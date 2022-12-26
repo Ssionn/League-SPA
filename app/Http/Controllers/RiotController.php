@@ -2,40 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
 
 class RiotController extends Controller
 {
-    public function getSummonerName(Request $request): JsonResponse
+    public function getSummoner(Request $request)
     {
-        $api_key = env('RIOT_API_KEY');
-
         $request->validate([
-            'region' => 'required',
-            'summonerName' => 'required'
+            'region' => [
+                'required',
+                Rule::in(['br1', 'eun1', 'euw1', 'jp1', 'kr', 'la1', 'la2', 'na1', 'oc1', 'tr1', 'ru']),
+            ],
+            'summonerName' => [
+                'required',
+                'string',
+            ],
         ]);
 
-        $region = $request->input('region');
-        $summonerName = $request->input('summonerName');
-
-        $client = new Client();
-
-        try {
-            $response = $client->request('GET', "https://" . $region . ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $summonerName . "?api_key=" .  $api_key);
-
-            $statusCode = $response->getStatusCode();
-            $body = $response->getBody()->getContents();
-            $json = json_decode($body, true);
-
-            return response()->json($json, $statusCode);
-
-        } catch (GuzzleException $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        $response = Http::get('https://' . $request->input('region') . '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' . $request->input('summonerName') . '?api_key=' . env('RIOT_API_KEY'));
+        return $response->json();
     }
+
 }

@@ -5,20 +5,39 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>League SPA</title>
+    @vite('resources/css/app.css')
 </head>
-<body>
-    <form method="POST">
+<body class="bg-[#232323]">
+
+<div class="container mx-auto flex justify-center w-full mt-20">
+    <form method="POST" action="/summoner">
         @csrf
-        <label for="name">Summoner Name:</label><br>
-        <input type="text" id="name" name="summonerName"><br>
-        <label for="region">Region:</label><br>
-        <select id="region" name="region">
-            <option value="na1">North America</option>
-            <option value="euw1">Europe West</option>
-            <option value="eune1">Europe Nordic & East</option>
-        </select><br><br>
-        <button type="submit">Search</button>
+        <div class="flex flex-col space-y-4">
+            <input type="text" id="summonerName" name="summonerName" class="w-96 h-12 rounded-lg text-2xl text-center"
+                   placeholder="Summoner Name"><br>
+            <select name="region" id="region" class="w-96 h-12 rounded-lg text-2xl text-center">
+                <option selected disabled hidden>Region</option>
+                <option value="euw1">EUW</option>
+                <option value="na1">NA</option>
+                <option value="eun1">EUNE</option>
+                <option value="kr">KR</option>
+                <option value="br1">BR</option>
+                <option value="jp1">JP</option>
+                <option value="la1">LAN</option>
+                <option value="la2">LAS</option>
+                <option value="oc1">OCE</option>
+                <option value="ru">RU</option>
+                <option value="tr1">TR</option>
+            </select><br>
+        </div>
+        <div class="flex items-center justify-center mt-12">
+            <button type="submit"
+                    class="w-60 h-12 rounded-lg text-2xl text-center  border-2 border-[#581c87] hover:bg-[#7c3aed] transition-all ease-in-out  delay-150 hover:scale-110 text-white">
+                Search
+            </button>
+        </div>
     </form>
+</div>
 
 </body>
 </html>
