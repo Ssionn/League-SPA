@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/riot/{$summonerName}', [RiotController::class, 'getSummoner']);
+Route::get('/summoner', [RiotController::class, 'getSummoner']);
+
+

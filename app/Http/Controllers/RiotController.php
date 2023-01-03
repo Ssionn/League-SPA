@@ -17,12 +17,12 @@ class RiotController extends Controller
             ],
             'summonerName' => [
                 'required',
-                'string',
+                'string'
             ],
         ]);
 
         $response = Http::get('https://' . $request->input('region') . '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' . $request->input('summonerName') . '?api_key=' . env('RIOT_API_KEY'));
-        return $response->json();
+        return view('summoner', ['summoner' => $response->json()]);
     }
 
 }

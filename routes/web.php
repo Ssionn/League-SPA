@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::post('/summoner', [RiotController::class, 'getSummoner']);
+
+
