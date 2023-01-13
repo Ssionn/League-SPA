@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::resource('/summoner', SummonerController::class);
 
 Route::post('/summoner', [SummonerController::class, 'getSummoner']);
+
+Route::get('/summoner', [SummonerController::class, 'newSummoner']);
