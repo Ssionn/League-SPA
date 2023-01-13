@@ -19,20 +19,13 @@
     </div>
     <form method="POST" action="/summoner">
         @csrf
-    <div class="pl-10">
-        <input type="text" id="summonerName" name="summonerName" class="w-96 h-12 rounded-lg text-2xl text-center"
-               placeholder="Summoner Name" onclick="submitOnEnter(e)">
+    <div class="flex pl-16 mt-2">
+        <input type="text" id="newSummonerName" name="newSummonerName" class="w-96 h-12 rounded-lg text-2xl text-center"
+               placeholder="Summoner Name">
     </div>
     </form>
 </header>
 
-<script>
-    function submitOnEnter(e) {
-        if (e.key === 'Enter' || e.key === 'Return') {
-            document.forms[0].submit();
-        }
-    }
-</script>
 
 </body>
 </html>
